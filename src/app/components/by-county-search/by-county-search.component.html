@@ -1,0 +1,82 @@
+<h2>Form</h2>
+<!-- From start -->
+<div class="card-container">
+    <form [formGroup]="byCountyLookupForm" (ngSubmit)="onSubmit()">
+
+        <div>
+            <label for="selectCounty">County</label>
+            <select name="selectCounty" id="select_county_input" formControlName="selectCounty">
+                <option *ngFor="let country of countryList">
+                    {{country.country}}
+                </option>
+            </select>
+            <div class="emsg"
+                *ngIf="byCountyLookupForm.controls.selectCounty.invalid && (byCountyLookupForm.controls.selectCounty.touched || byCountyLookupForm.controls.selectCounty.dirty )">
+                <ng-container *ngIf="byCountyLookupForm.controls.selectCounty.errors.required">
+                    County is required.
+                </ng-container>
+            </div>
+        </div>
+
+        <div>
+            <label for="selectState">State</label>
+            <select name="selectState" id="select_state_input" formControlName="selectState">
+                <option *ngFor="let state of states">
+                    {{state}}
+                </option>
+            </select>
+
+            <div class="emsg"
+                *ngIf="byCountyLookupForm.controls.selectState.invalid && (byCountyLookupForm.controls.selectState.touched || byCountyLookupForm.controls.selectState.dirty )">
+
+                <ng-container *ngIf="byCountyLookupForm.controls.selectState.errors.required">
+                    State is required.
+                </ng-container>
+            </div>
+
+        </div>
+
+        <div>
+            <label for="">Issue Date From</label>
+            <input type="text" placeholder="dd/mm/yyyy" name="issueFrom" id="issue_form_input"
+                formControlName="issueFrom">
+            <div class="emsg"
+                *ngIf="byCountyLookupForm.controls.issueFrom.invalid && (byCountyLookupForm.controls.issueFrom.touched || byCountyLookupForm.controls.issueFrom.dirty )">
+                <ng-container *ngIf="byCountyLookupForm.controls.issueFrom.errors.required">
+                    Issue date From is required.
+                </ng-container>
+                <ng-container *ngIf="byCountyLookupForm.controls.issueFrom.errors.inValidDateformat">
+                    Invalid Issue from date format allowed value is dd/mm/yyyy.
+                </ng-container>
+
+
+            </div>
+
+        </div>
+
+        <div>
+            <label for="issueTo">Issue To</label>
+            <input type="text" placeholder="dd/mm/yyyy" name="issueTo" id="issue_to_form_inout"
+                formControlName="issueTo">
+            <div class="emsg"
+                *ngIf="byCountyLookupForm.controls.issueTo.invalid && (byCountyLookupForm.controls.issueTo.touched || byCountyLookupForm.controls.issueTo.dirty )">
+                <ng-container *ngIf="byCountyLookupForm.controls.issueTo.errors.required">
+                    IssueTo is required.
+                </ng-container>
+                <ng-container *ngIf="byCountyLookupForm.controls.issueTo.errors.inValidDateformat">
+                    Invalid Issue to date format allowed value is dd/mm/yyyy.
+                </ng-container>
+                <ng-container
+                    *ngIf="!byCountyLookupForm.controls.issueTo.errors.inValidDateformat && byCountyLookupForm.controls.issueTo.errors.invalidRange">
+                    End Issue Date should be greater then or equal to begin issue date
+                </ng-container>
+
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+
+<!-- From start -->
